@@ -22,7 +22,7 @@ $(document).ready(function(){
 		url='https://www.googleapis.com/youtube/v3/search';
 		$.getJSON(url,params, function(data){
 
-			showResult(data.search)
+			showResult(data.items)
 		});
 	};
 
@@ -30,12 +30,18 @@ $(document).ready(function(){
 		var html="";
 		$.each(result,function(index,value){
 
-			html+='<p>'+value.Title+'</p>';
+			html+='<p>'+ value.snippet.title+'</p>'+
+			'<a href = "https://www.youtube.com/watch?v='+ value.id.videoId +'">'
+			+	'<img src= "'+value.snippet.thumbnails.default.url+'"/></a>';
+			
+			
 
-			console.log(value.Title);
+	
+		
 
 		});
 		$('#searchResult').html(html);
+
 	};
 
 });
